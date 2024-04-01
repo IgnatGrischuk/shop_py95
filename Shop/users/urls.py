@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import ActivateUser, TestLoginView
+from users.views import ActivateUser, TestLoginView
 
 
 urlpatterns = [
