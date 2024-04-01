@@ -3,23 +3,14 @@ from users.models import CustomUser
 
 
 class Category(models.Model):
-    class Meta:
-        verbose_name_plural = 'Categories'
-
     name = models.CharField(max_length=100)
     description = models.TextField()
-
-    def __str__(self):
-        return self.name
 
 
 class Seller(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     contact = models.CharField(max_length=500)
-
-    def __str__(self):
-        return self.name
 
 
 class Discount(models.Model):
@@ -28,9 +19,6 @@ class Discount(models.Model):
     date_start = models.DateField()
     date_end = models.DateField()
 
-    def __str__(self):
-        return f"{self.name}{self.percent}"
-
 
 class Promocode(models.Model):
     name = models.CharField(max_length=100)
@@ -38,9 +26,6 @@ class Promocode(models.Model):
     date_start = models.DateField()
     date_end = models.DateField()
     is_cumulative = models.BooleanField()
-
-    def __str__(self):
-        return f"{self.name}{self.percent}"
 
 
 class Product(models.Model):
@@ -55,16 +40,10 @@ class Product(models.Model):
                                  on_delete=models.SET_NULL)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"{self.name}{self.article}"
-
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='product_images/')
-
-    def __str__(self):
-        return f"Image for {self.product}"
 
 
 class Cart(models.Model):
@@ -117,9 +96,6 @@ class Order(models.Model):
     delivery_notification_before = models.PositiveIntegerField(
         choices=NOTIF_TIME, default=6)
 
-    def __str__(self):
-        return f"{self.pk}{self.user.email}"
-
 
 class OrderProducts(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -130,3 +106,4 @@ class OrderProducts(models.Model):
 class CashBack(models.Model):
     percent = models.PositiveIntegerField()
     treshold = models.PositiveIntegerField()
+
