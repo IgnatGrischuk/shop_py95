@@ -42,6 +42,7 @@ class Promocode(models.Model):
     def __str__(self):
         return f"{self.name}{self.percent}"
 
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     article = models.CharField(max_length=100)
