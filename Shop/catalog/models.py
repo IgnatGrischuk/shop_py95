@@ -40,8 +40,7 @@ class Promocode(models.Model):
     is_cumulative = models.BooleanField()
 
     def __str__(self):
-        return
-
+        return f"{self.name}{self.percent}"
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -130,4 +129,3 @@ class OrderProducts(models.Model):
 class CashBack(models.Model):
     percent = models.PositiveIntegerField()
     treshold = models.PositiveIntegerField()
-
