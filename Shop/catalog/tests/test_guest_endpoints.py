@@ -1,6 +1,7 @@
 import pytest
 from rest_framework.test import APITestCase
 
+
 pytestmark = [pytest.mark.django_db]
 
 
