@@ -43,7 +43,7 @@ class SellerProductView(APIView):
 class DiscountListView(ListAPIView):
     queryset = Discount.objects.all()
     serializer_class = DiscountSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (AllowAny, )
 
 
 class DiscountProductsView(APIView):
@@ -87,7 +87,6 @@ class CartView(APIView):
         )
         serializer = CartSerializer({"products": cart})
         return Response(serializer.data)
-
 
     def delete(self, request):
         input_serializer = DeleteProductSerializer(data=request.data)
