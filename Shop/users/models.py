@@ -40,7 +40,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                                           default=0)
     is_notification_required = models.BooleanField(default=True)
 
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
