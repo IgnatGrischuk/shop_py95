@@ -9,15 +9,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import F
 from catalog.tasks import some_task
+from drf_yasg.utils import swagger_auto_schema
+
 
 class CategoryListView(ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
 
 
 class CategoryProductsView(APIView):
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
 
     def get(self, request, category_id):
         queryset = Product.objects.filter(category__id=category_id)
@@ -29,11 +31,11 @@ class CategoryProductsView(APIView):
 class SellerListView(APIView):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
 
 
 class SellerProductView(APIView):
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
 
     def get(self, seller_id):
         queryset = Product.objects.filter(seller_id=seller_id)
@@ -44,11 +46,11 @@ class SellerProductView(APIView):
 class DiscountListView(ListAPIView):
     queryset = Discount.objects.all()
     serializer_class = DiscountSerializer
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
 
 
 class DiscountProductsView(APIView):
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
 
     def get(self, request, discount_id):
         queryset = Product.objects.filter(discount__id=discount_id)
@@ -57,7 +59,7 @@ class DiscountProductsView(APIView):
 
 
 class CartView(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         input_serializer = AddProductSerializer(data=request.data)
@@ -102,6 +104,13 @@ class CartView(APIView):
 class OrderView(APIView):
     permission_classes = (IsAuthenticated,)
 
+    @swagger_auto_schema(
+        request_method="Post",
+        request_body=OrderSerializer,
+        responses={
+            200: OrderSerializer
+        }
+    )
     def post(self, request):
         input_serializer = OrderSerializer(data=request.data,
                                            context={'request': request})
