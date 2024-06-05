@@ -104,6 +104,7 @@ class CartView(APIView):
 class OrderView(APIView):
     permission_classes = (IsAuthenticated,)
 
+
     @swagger_auto_schema(
         request_method="Post",
         request_body=OrderSerializer,
