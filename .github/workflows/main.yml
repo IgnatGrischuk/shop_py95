@@ -18,3 +18,6 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Set up .env
+        run: |
+         echo "@{{secrets.ENV_FILE}}" > Shop/.env
